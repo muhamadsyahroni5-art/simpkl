@@ -1,0 +1,158 @@
+{
+  "entities": {
+    "User": {
+      "title": "AppUser",
+      "description": "System administrator and staff accounts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nama": { "type": "string" },
+        "nip": { "type": "string" },
+        "username": { "type": "string" },
+        "jabatan": { "type": "string" },
+        "seksi": { "type": "string" },
+        "role": { "type": "string" },
+        "noHp": { "type": "string" },
+        "email": { "type": "string" }
+      },
+      "required": ["id", "nama", "username", "role"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Internship / PKL student profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "photo": { "type": "string" },
+        "username": { "type": "string" },
+        "nama": { "type": "string" },
+        "nisn": { "type": "string" },
+        "tempatLahir": { "type": "string" },
+        "tanggalLahir": { "type": "string" },
+        "kelas": { "type": "string" },
+        "programKeahlian": { "type": "string" },
+        "noHp": { "type": "string" },
+        "asalSekolah": { "type": "string" },
+        "pembimbingSekolah": { "type": "string" },
+        "noHpPembimbing": { "type": "string" },
+        "alamat": { "type": "string" },
+        "tempatPenugasan": { "type": "string" },
+        "pembimbingKantor": { "type": "string" },
+        "nipPembimbing": { "type": "string" },
+        "status": { "type": "string" },
+        "tahun": { "type": "string" },
+        "tanggalMulai": { "type": "string" },
+        "tanggalSelesai": { "type": "string" }
+      },
+      "required": ["id", "nama", "nisn", "asalSekolah", "tempatPenugasan"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Daily student attendance log with optional GPS validation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentNama": { "type": "string" },
+        "nisn": { "type": "string" },
+        "seksi": { "type": "string" },
+        "tanggal": { "type": "string" },
+        "jamMasuk": { "type": "string" },
+        "jamPulang": { "type": "string" },
+        "status": { "type": "string" },
+        "keterangan": { "type": "string" },
+        "pembimbingSekolah": { "type": "string" },
+        "noHpPembimbing": { "type": "string" }
+      },
+      "required": ["id", "studentId", "tanggal", "status"]
+    },
+    "DailyActivity": {
+      "title": "DailyActivity",
+      "description": "Daily activity log of PKL students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentNama": { "type": "string" },
+        "nisn": { "type": "string" },
+        "seksi": { "type": "string" },
+        "tanggal": { "type": "string" },
+        "uraianKegiatan": { "type": "string" },
+        "jamMulai": { "type": "string" },
+        "jamSelesai": { "type": "string" },
+        "outputKegiatan": { "type": "string" },
+        "kendala": { "type": "string" },
+        "statusVerifikasi": { "type": "string" },
+        "catatanPembimbing": { "type": "string" }
+      },
+      "required": ["id", "studentId", "tanggal", "uraianKegiatan"]
+    },
+    "Assessment": {
+      "title": "Assessment",
+      "description": "6-aspect official performance assessment for PKL students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentNama": { "type": "string" },
+        "nisn": { "type": "string" },
+        "seksi": { "type": "string" },
+        "kedisiplinan": { "type": "number" },
+        "inisiatif": { "type": "number" },
+        "kerjasama": { "type": "number" },
+        "tanggungJawab": { "type": "number" },
+        "kebersihan": { "type": "number" },
+        "namaBidangKeahlian": { "type": "string" },
+        "nilaiBidangKeahlian": { "type": "number" },
+        "nilaiRataRata": { "type": "number" },
+        "grade": { "type": "string" },
+        "predikat": { "type": "string" },
+        "catatan": { "type": "string" },
+        "tanggalPenilaian": { "type": "string" },
+        "penilaiNama": { "type": "string" },
+        "penilaiNip": { "type": "string" }
+      },
+      "required": ["id", "studentId", "nilaiRataRata", "grade", "predikat"]
+    },
+    "GpsLocationConfig": {
+      "title": "GpsLocationConfig",
+      "description": "Office coordinates and GPS geofencing radius configuration",
+      "type": "object",
+      "properties": {
+        "isEnabled": { "type": "boolean" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "radiusMeters": { "type": "number" },
+        "officeName": { "type": "string" },
+        "officeAddress": { "type": "string" }
+      },
+      "required": ["isEnabled", "latitude", "longitude", "radiusMeters"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "System accounts and profiles"
+    },
+    "/students/{studentId}": {
+      "schema": { "$ref": "#/entities/Student" },
+      "description": "Registered PKL students"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": { "$ref": "#/entities/AttendanceRecord" },
+      "description": "Student attendance logs"
+    },
+    "/activities/{activityId}": {
+      "schema": { "$ref": "#/entities/DailyActivity" },
+      "description": "Student daily activity journals"
+    },
+    "/assessments/{assessmentId}": {
+      "schema": { "$ref": "#/entities/Assessment" },
+      "description": "Student 6-aspect evaluation scores"
+    },
+    "/settings/gps_config": {
+      "schema": { "$ref": "#/entities/GpsLocationConfig" },
+      "description": "Global office GPS location and geofence radius settings"
+    }
+  }
+}

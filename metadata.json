@@ -1,0 +1,6 @@
+{
+  "name": "SIM-PKL Kemenag Lebak",
+  "description": "Sistem Informasi Manajemen Data Siswa/Mahasiswa PKL & Magang Kantor Kementerian Agama Kabupaten Lebak dengan integrasi cetak dokumen resmi, absensi, kegiatan, penilaian, dan export bundle PHP/MySQL.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
